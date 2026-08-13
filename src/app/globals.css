@@ -130,4 +130,12 @@
 	html {
 		@apply font-sans;
 	}
+	/* ẩn thanh scroll nhưng vẫn cho phép cuộn */
+	* {
+		-ms-overflow-style: none;
+		scrollbar-width: none;
+	}
+	*::-webkit-scrollbar {
+		display: none;
+	}
 }
