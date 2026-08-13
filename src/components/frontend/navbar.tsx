@@ -219,7 +219,7 @@ export function Navbar() {
 								{/* Desktop Mega Menu Dropdown */}
 								{item.hasMegaMenu && activeDropdown === item.name && (
 									<div
-										className="absolute top-full left-1/2 z-50 mt-2 w-80 -translate-x-1/2 rounded-lg bg-white p-4 shadow-xl"
+										className="absolute top-full left-1/2 z-50 mt-2 w-80 -translate-x-1/2 rounded-lg border-gray-200 border-b bg-white p-4 shadow-xl"
 										onMouseEnter={() => handleMouseEnter(item.name)}
 										onMouseLeave={handleMouseLeave}
 										role="menu"
@@ -251,7 +251,7 @@ export function Navbar() {
 					{/* Desktop CTA */}
 					<div className="hidden items-center space-x-4 md:flex">
 						<Link
-							className="font-medium text-gray-700 transition-colors duration-200 hover:text-primary"
+							className="rounded-md bg-blue-700 px-4 py-2 font-medium text-gray-50 transition-colors duration-200 hover:bg-blue-800"
 							href="/login"
 						>
 							Đăng nhập
