@@ -12,6 +12,7 @@ const navigation = [
 	{ hasMegaMenu: true, href: "/doctors", name: "Bác sĩ" },
 	{ hasMegaMenu: true, href: "/specialties", name: "Chuyên khoa" },
 	{ href: "/about", name: "Về chúng tôi" },
+	{ href: "/join/doctors", name: "Dành cho bác sĩ" },
 	{ href: "/contact", name: "Liên hệ" },
 ];
 
