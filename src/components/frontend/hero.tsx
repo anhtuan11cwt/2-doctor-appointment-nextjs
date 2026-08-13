@@ -1,6 +1,18 @@
+"use client";
+
+import { Check, Clock, FileText } from "lucide-react";
 import Image from "next/image";
 import { assets } from "../../../public/assets";
 import { SearchBar } from "./search-bar";
+import { TransitionText } from "./transition-text";
+
+const professionalTitles = [
+	"bác sĩ tổng quát",
+	"bác sĩ da liễu",
+	"bác sĩ nhi",
+	"bác sĩ thần kinh",
+	"bác sĩ tim mạch",
+];
 
 export function Hero() {
 	return (
@@ -10,8 +22,16 @@ export function Hero() {
 					{/* Left content */}
 					<div className="space-y-8">
 						<h1 className="font-bold text-4xl text-gray-900 leading-tight md:text-5xl lg:text-6xl">
-							Sức khỏe của bạn,{" "}
-							<span className="text-primary">ưu tiên của chúng tôi</span>
+							Đặt lịch với{" "}
+							<span className="text-primary">
+								<TransitionText
+									className="text-primary"
+									interval={3000}
+									texts={professionalTitles}
+								/>
+							</span>
+							<br />
+							của bạn
 						</h1>
 						<p className="max-w-xl text-gray-600 text-lg">
 							Đặt lịch khám bệnh trực tuyến nhanh chóng và tiện lợi. Kết nối với
@@ -21,19 +41,37 @@ export function Hero() {
 						{/* Search Bar */}
 						<SearchBar />
 
+						{/* CTA Buttons */}
+						<div className="flex flex-wrap gap-4">
+							<button
+								className="flex items-center gap-2 rounded-lg bg-primary px-6 py-3 font-medium text-white transition-colors hover:bg-primary/90"
+								type="button"
+							>
+								<Clock className="h-5 w-5" />
+								Cần khám gấp
+							</button>
+							<button
+								className="flex items-center gap-2 rounded-lg border border-gray-300 px-6 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-50"
+								type="button"
+							>
+								<FileText className="h-4 w-4" />
+								Cần kê đơn thuốc
+							</button>
+						</div>
+
 						{/* Stats */}
 						<div className="grid grid-cols-3 gap-8 pt-8">
 							<div className="text-center">
-								<div className="font-bold text-3xl text-primary">10K+</div>
-								<div className="text-gray-500 text-sm">Bác sĩ</div>
-							</div>
-							<div className="text-center">
-								<div className="font-bold text-3xl text-primary">50K+</div>
+								<div className="font-bold text-3xl text-primary">1.800+</div>
 								<div className="text-gray-500 text-sm">Bệnh nhân</div>
 							</div>
 							<div className="text-center">
-								<div className="font-bold text-3xl text-primary">100K+</div>
-								<div className="text-gray-500 text-sm">Lượt khám</div>
+								<div className="font-bold text-3xl text-primary">120+</div>
+								<div className="text-gray-500 text-sm">Chuyên gia</div>
+							</div>
+							<div className="text-center">
+								<div className="font-bold text-3xl text-primary">98%</div>
+								<div className="text-gray-500 text-sm">Hài lòng</div>
 							</div>
 						</div>
 					</div>
@@ -53,20 +91,7 @@ export function Hero() {
 							<div className="absolute top-10 left-10 animate-bounce rounded-xl bg-white p-4 shadow-lg">
 								<div className="flex items-center space-x-3">
 									<div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
-										<svg
-											aria-hidden="true"
-											className="h-5 w-5 text-green-600"
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24"
-										>
-											<path
-												d="M5 13l4 4L19 7"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth={2}
-											/>
-										</svg>
+										<Check className="h-5 w-5 text-green-600" />
 									</div>
 									<div>
 										<div className="font-medium text-gray-900 text-sm">
@@ -79,20 +104,7 @@ export function Hero() {
 							<div className="absolute right-10 bottom-10 rounded-xl bg-white p-4 shadow-lg">
 								<div className="flex items-center space-x-3">
 									<div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
-										<svg
-											aria-hidden="true"
-											className="h-5 w-5 text-blue-600"
-											fill="none"
-											stroke="currentColor"
-											viewBox="0 0 24 24"
-										>
-											<path
-												d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth={2}
-											/>
-										</svg>
+										<Clock className="h-5 w-5 text-blue-600" />
 									</div>
 									<div>
 										<div className="font-medium text-gray-900 text-sm">
