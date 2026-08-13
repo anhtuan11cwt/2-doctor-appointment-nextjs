@@ -9,6 +9,8 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
+import toast from "react-hot-toast";
 
 const sidebarLinks = [
 	{
@@ -35,6 +37,11 @@ const sidebarLinks = [
 
 export function Sidebar() {
 	const pathname = usePathname();
+
+	const handleLogout = async () => {
+		await signOut({ callbackUrl: "/login" });
+		toast.success("Đăng xuất thành công!");
+	};
 
 	return (
 		<aside className="fixed top-16 left-0 h-[calc(100vh-4rem)] w-64 border-gray-200 border-r bg-white">
@@ -66,6 +73,7 @@ export function Sidebar() {
 				<div className="border-gray-200 border-t p-4">
 					<button
 						className="flex w-full items-center gap-3 rounded-lg px-4 py-3 font-medium text-gray-700 text-sm transition-all hover:bg-gray-100"
+						onClick={handleLogout}
 						type="button"
 					>
 						<LogOut className="h-5 w-5" />

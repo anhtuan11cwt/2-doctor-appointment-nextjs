@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -13,6 +14,7 @@ import { type RegisterInputProps, registerSchema } from "@/lib/validations";
 export function RegisterForm() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
+	const router = useRouter();
 	const {
 		register,
 		handleSubmit,
@@ -28,6 +30,9 @@ export function RegisterForm() {
 			const result = await createUser(data);
 			if (result.status === 201) {
 				toast.success(result.message);
+				if (result.data) {
+					router.push(`/verify-account/${result.data.id}`);
+				}
 			} else {
 				toast.error(result.message);
 			}

@@ -3,10 +3,19 @@
 import { LogOut, Settings, User } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 export function DashboardNav() {
 	const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+	const { data: session } = useSession();
+
+	const handleLogout = async () => {
+		setIsDropdownOpen(false);
+		await signOut({ callbackUrl: "/login" });
+		toast.success("Đăng xuất thành công!");
+	};
 
 	return (
 		<nav className="fixed top-0 right-0 left-0 z-50 border-gray-200 border-b bg-white">
@@ -29,14 +38,16 @@ export function DashboardNav() {
 								alt="Avatar"
 								className="h-8 w-8 rounded-full object-cover"
 								height={32}
-								src="/profile_pic.png"
+								src={session?.user?.image || "/profile_pic.png"}
 								width={32}
 							/>
 							<div className="hidden text-left md:block">
 								<p className="font-medium text-gray-900 text-sm">
-									Bác sĩ Nguyễn Văn A
+									{session?.user?.name || "Người dùng"}
 								</p>
-								<p className="text-gray-500 text-xs">doctor@example.com</p>
+								<p className="text-gray-500 text-xs">
+									{session?.user?.email || ""}
+								</p>
 							</div>
 						</button>
 
@@ -62,7 +73,7 @@ export function DashboardNav() {
 								<hr className="my-1" />
 								<button
 									className="flex w-full items-center gap-2 px-4 py-2 text-red-600 text-sm hover:bg-gray-100"
-									onClick={() => setIsDropdownOpen(false)}
+									onClick={handleLogout}
 									type="button"
 								>
 									<LogOut className="h-4 w-4" />

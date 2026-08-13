@@ -72,3 +72,54 @@ export async function createUser(data: RegisterInputProps) {
 		};
 	}
 }
+
+export async function getUserById(id: string) {
+	try {
+		const user = await prisma.user.findUnique({
+			where: { id },
+		});
+
+		if (!user) {
+			return {
+				data: null,
+				message: "Không tìm thấy người dùng",
+				status: 404,
+			};
+		}
+
+		return {
+			data: user,
+			message: "Lấy thông tin người dùng thành công",
+			status: 200,
+		};
+	} catch (error) {
+		console.error("Lỗi khi lấy thông tin người dùng:", error);
+		return {
+			data: null,
+			message: "Đã xảy ra lỗi",
+			status: 500,
+		};
+	}
+}
+
+export async function updateUserById(id: string) {
+	try {
+		const user = await prisma.user.update({
+			data: { isVerified: true },
+			where: { id },
+		});
+
+		return {
+			data: user,
+			message: "Xác minh tài khoản thành công",
+			status: 200,
+		};
+	} catch (error) {
+		console.error("Lỗi khi cập nhật người dùng:", error);
+		return {
+			data: null,
+			message: "Đã xảy ra lỗi khi xác minh",
+			status: 500,
+		};
+	}
+}

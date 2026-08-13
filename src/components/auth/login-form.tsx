@@ -2,14 +2,17 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { SubmitButton } from "@/components/form-inputs/submit-button";
 import { TextInput } from "@/components/form-inputs/text-input";
 import { type LoginInputProps, loginSchema } from "@/lib/validations";
 
 export function LoginForm() {
 	const [isLoading, setIsLoading] = useState(false);
+	const router = useRouter();
 	const {
 		register,
 		handleSubmit,
@@ -20,11 +23,26 @@ export function LoginForm() {
 
 	const onSubmit = async (data: LoginInputProps) => {
 		setIsLoading(true);
-		// TODO: Triển khai logic đăng nhập
-		console.log("Dữ liệu đăng nhập:", data);
-		// Giả lập gọi API với độ trễ 2 giây
-		await new Promise((resolve) => setTimeout(resolve, 2000));
-		setIsLoading(false);
+		try {
+			await new Promise((resolve) => setTimeout(resolve, 2000));
+			const { signIn } = await import("next-auth/react");
+			const result = await signIn("credentials", {
+				email: data.email,
+				password: data.password,
+				redirect: false,
+			});
+
+			if (result?.error) {
+				toast.error(result.error);
+			} else {
+				toast.success("Đăng nhập thành công!");
+				router.push("/dashboard");
+			}
+		} catch {
+			toast.error("Đã xảy ra lỗi, vui lòng thử lại!");
+		} finally {
+			setIsLoading(false);
+		}
 	};
 
 	return (

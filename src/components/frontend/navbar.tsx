@@ -1,9 +1,11 @@
 "use client";
 
-import { ChevronDown, Menu, X } from "lucide-react";
+import { ChevronDown, LogOut, Menu, Settings, User, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { signOut, useSession } from "next-auth/react";
 import { useEffect, useRef, useState } from "react";
+import toast from "react-hot-toast";
 
 const navigation = [
 	{ href: "/", name: "Trang chủ" },
@@ -119,7 +121,9 @@ export function Navbar() {
 	const [expandedMobileCategory, setExpandedMobileCategory] = useState<
 		string | null
 	>(null);
+	const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+	const { data: session } = useSession();
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -155,14 +159,20 @@ export function Navbar() {
 		}, 100);
 	};
 
+	const handleLogout = async () => {
+		setIsUserDropdownOpen(false);
+		await signOut({ callbackUrl: "/login" });
+		toast.success("Đăng xuất thành công!");
+	};
+
 	return (
 		<header
 			className={`fixed top-0 right-0 left-0 z-50 transition-all duration-300 ${
 				isScrolled ? "bg-white/95 shadow-sm backdrop-blur-md" : "bg-white"
 			}`}
 		>
-			<nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<div className="flex h-16 items-center justify-between">
+			<nav className="mx-auto max-w-7xl px-8">
+				<div className="flex items-center justify-between py-2.5">
 					{/* Logo */}
 					<div className="flex-shrink-0">
 						<Link
@@ -250,18 +260,77 @@ export function Navbar() {
 
 					{/* Desktop CTA */}
 					<div className="hidden items-center space-x-4 md:flex">
-						<Link
-							className="rounded-md bg-blue-700 px-4 py-2 font-medium text-gray-50 transition-colors duration-200 hover:bg-blue-800"
-							href="/login"
-						>
-							Đăng nhập
-						</Link>
-						<Link
-							className="rounded-md bg-primary px-4 py-2 font-medium text-white transition-colors duration-200 hover:bg-primary/90"
-							href="/register"
-						>
-							Đăng ký
-						</Link>
+						{session ? (
+							<div className="relative">
+								<button
+									className="flex items-center gap-3 rounded-lg p-2 transition-colors hover:bg-gray-100"
+									onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
+									type="button"
+								>
+									<Image
+										alt="Avatar"
+										className="h-8 w-8 rounded-full object-cover"
+										height={32}
+										src={session.user?.image || "/profile_pic.png"}
+										width={32}
+									/>
+									<div className="hidden text-left lg:block">
+										<p className="font-medium text-gray-900 text-sm">
+											{session.user?.name || "Người dùng"}
+										</p>
+										<p className="text-gray-500 text-xs">
+											{session.user?.email || ""}
+										</p>
+									</div>
+									<ChevronDown className="h-4 w-4 text-gray-500" />
+								</button>
+
+								{isUserDropdownOpen && (
+									<div className="absolute right-0 mt-2 w-48 rounded-lg border border-gray-200 bg-white py-1 shadow-lg">
+										<Link
+											className="flex items-center gap-2 px-4 py-2 text-gray-700 text-sm hover:bg-gray-100"
+											href="/dashboard"
+											onClick={() => setIsUserDropdownOpen(false)}
+										>
+											<User className="h-4 w-4" />
+											Dashboard
+										</Link>
+										<Link
+											className="flex items-center gap-2 px-4 py-2 text-gray-700 text-sm hover:bg-gray-100"
+											href="/dashboard/settings"
+											onClick={() => setIsUserDropdownOpen(false)}
+										>
+											<Settings className="h-4 w-4" />
+											Cài đặt
+										</Link>
+										<hr className="my-1" />
+										<button
+											className="flex w-full items-center gap-2 px-4 py-2 text-red-600 text-sm hover:bg-gray-100"
+											onClick={handleLogout}
+											type="button"
+										>
+											<LogOut className="h-4 w-4" />
+											Đăng xuất
+										</button>
+									</div>
+								)}
+							</div>
+						) : (
+							<>
+								<Link
+									className="rounded-md bg-blue-700 px-4 py-2 font-medium text-gray-50 transition-colors duration-200 hover:bg-blue-800"
+									href="/login"
+								>
+									Đăng nhập
+								</Link>
+								<Link
+									className="rounded-md bg-primary px-4 py-2 font-medium text-white transition-colors duration-200 hover:bg-primary/90"
+									href="/register"
+								>
+									Đăng ký
+								</Link>
+							</>
+						)}
 					</div>
 
 					{/* Mobile menu button */}
@@ -398,22 +467,58 @@ export function Navbar() {
 
 					{/* CTA buttons */}
 					<div className="border-gray-100 border-t px-4 py-4">
-						<div className="space-y-2">
-							<Link
-								className="block w-full rounded-md border border-primary px-4 py-2 text-center font-medium text-primary transition-colors duration-200 hover:bg-primary/5"
-								href="/login"
-								onClick={closeMobileMenu}
-							>
-								Đăng nhập
-							</Link>
-							<Link
-								className="block w-full rounded-md bg-primary px-4 py-2 text-center font-medium text-white transition-colors duration-200 hover:bg-primary/90"
-								href="/register"
-								onClick={closeMobileMenu}
-							>
-								Đăng ký
-							</Link>
-						</div>
+						{session ? (
+							<div className="space-y-3">
+								<div className="flex items-center gap-3 px-2">
+									<Image
+										alt="Avatar"
+										className="h-10 w-10 rounded-full object-cover"
+										height={40}
+										src={session.user?.image || "/profile_pic.png"}
+										width={40}
+									/>
+									<div>
+										<p className="font-medium text-gray-900 text-sm">
+											{session.user?.name || "Người dùng"}
+										</p>
+										<p className="text-gray-500 text-xs">
+											{session.user?.email || ""}
+										</p>
+									</div>
+								</div>
+								<Link
+									className="block w-full rounded-md border border-primary px-4 py-2 text-center font-medium text-primary transition-colors duration-200 hover:bg-primary/5"
+									href="/dashboard"
+									onClick={closeMobileMenu}
+								>
+									Dashboard
+								</Link>
+								<button
+									className="block w-full rounded-md bg-red-600 px-4 py-2 text-center font-medium text-white transition-colors duration-200 hover:bg-red-700"
+									onClick={handleLogout}
+									type="button"
+								>
+									Đăng xuất
+								</button>
+							</div>
+						) : (
+							<div className="space-y-2">
+								<Link
+									className="block w-full rounded-md border border-primary px-4 py-2 text-center font-medium text-primary transition-colors duration-200 hover:bg-primary/5"
+									href="/login"
+									onClick={closeMobileMenu}
+								>
+									Đăng nhập
+								</Link>
+								<Link
+									className="block w-full rounded-md bg-primary px-4 py-2 text-center font-medium text-white transition-colors duration-200 hover:bg-primary/90"
+									href="/register"
+									onClick={closeMobileMenu}
+								>
+									Đăng ký
+								</Link>
+							</div>
+						)}
 					</div>
 				</div>
 			</div>
