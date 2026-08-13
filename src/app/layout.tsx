@@ -18,7 +18,11 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html className={cn("font-sans", inter.variable)} lang="vi">
+		<html
+			className={cn("font-sans", inter.variable)}
+			lang="vi"
+			suppressHydrationWarning
+		>
 			<body>
 				<Providers>
 					<Toaster position="top-center" toastOptions={{ duration: 2000 }} />

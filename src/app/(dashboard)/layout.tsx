@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { AuthLoader } from "@/components/auth-loader";
-import { DashboardNav } from "@/components/dashboard/dashboard-nav";
+import { Navbar } from "@/components/dashboard/navbar";
 import { Sidebar } from "@/components/dashboard/sidebar";
 
 interface DashboardLayoutProps {
@@ -10,11 +10,11 @@ interface DashboardLayoutProps {
 export default function DashboardLayout({ children }: DashboardLayoutProps) {
 	return (
 		<AuthLoader>
-			<div className="min-h-screen bg-gray-100">
-				<DashboardNav />
-				<div className="flex pt-16">
-					<Sidebar />
-					<main className="ml-64 flex-1 p-8">{children}</main>
+			<div className="flex h-screen overflow-hidden">
+				<Sidebar className="hidden w-[280px] border-r lg:flex" />
+				<div className="flex flex-1 flex-col overflow-hidden">
+					<Navbar />
+					<main className="flex-1 overflow-y-auto p-4 lg:p-6">{children}</main>
 				</div>
 			</div>
 		</AuthLoader>

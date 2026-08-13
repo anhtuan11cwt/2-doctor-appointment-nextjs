@@ -294,7 +294,7 @@ export function Navbar() {
 											onClick={() => setIsUserDropdownOpen(false)}
 										>
 											<User className="h-4 w-4" />
-											Dashboard
+											Bảng điều khiển
 										</Link>
 										<Link
 											className="flex items-center gap-2 px-4 py-2 text-gray-700 text-sm hover:bg-gray-100"
@@ -492,7 +492,7 @@ export function Navbar() {
 									href="/dashboard"
 									onClick={closeMobileMenu}
 								>
-									Dashboard
+									Bảng điều khiển
 								</Link>
 								<button
 									className="block w-full rounded-md bg-red-600 px-4 py-2 text-center font-medium text-white transition-colors duration-200 hover:bg-red-700"

@@ -8,8 +8,8 @@ export function AuthLoader({ children }: { children: React.ReactNode }) {
 
 	if (status === "loading") {
 		return (
-			<div className="flex min-h-screen items-center justify-center bg-white">
-				<Loader2 className="h-8 w-8 animate-spin text-blue-600" />
+			<div className="flex min-h-screen items-center justify-center bg-background">
+				<Loader2 className="h-8 w-8 animate-spin text-primary" />
 			</div>
 		);
 	}
