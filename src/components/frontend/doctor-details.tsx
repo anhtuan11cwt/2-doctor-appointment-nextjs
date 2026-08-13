@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Availability } from "./availability";
 
 export function DoctorDetails() {
 	const [activeTab, setActiveTab] = useState("availability");
@@ -80,58 +81,7 @@ export function DoctorDetails() {
 					</div>
 				)}
 
-				{activeTab === "availability" && (
-					<div className="space-y-6">
-						<div>
-							<h3 className="mb-3 font-bold text-gray-900 text-lg">
-								Chọn ngày khám
-							</h3>
-							<div className="grid grid-cols-7 gap-2">
-								{["T2", "T3", "T4", "T5", "T6", "T7", "CN"].map(
-									(day, index) => (
-										<button
-											className={`rounded-md p-2 text-center text-sm transition-all ${
-												index === 0
-													? "bg-blue-600 text-white"
-													: "bg-gray-100 text-gray-700 hover:bg-gray-200"
-											}`}
-											key={day}
-											type="button"
-										>
-											{day}
-										</button>
-									),
-								)}
-							</div>
-						</div>
-
-						<div>
-							<h3 className="mb-3 font-bold text-gray-900 text-lg">
-								Chọn giờ khám
-							</h3>
-							<div className="grid grid-cols-4 gap-2">
-								{[
-									"08:00",
-									"09:00",
-									"10:00",
-									"11:00",
-									"14:00",
-									"15:00",
-									"16:00",
-									"17:00",
-								].map((time) => (
-									<button
-										className="rounded-md bg-gray-100 px-3 py-2 text-center text-sm transition-all hover:bg-blue-100 hover:text-blue-600"
-										key={time}
-										type="button"
-									>
-										{time}
-									</button>
-								))}
-							</div>
-						</div>
-					</div>
-				)}
+				{activeTab === "availability" && <Availability />}
 			</div>
 		</div>
 	);
