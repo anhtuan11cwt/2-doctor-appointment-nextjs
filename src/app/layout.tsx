@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { cn } from "@/lib/utils";
@@ -17,7 +18,10 @@ export default function RootLayout({
 }) {
 	return (
 		<html className={cn("font-sans", inter.variable)} lang="vi">
-			<body>{children}</body>
+			<body>
+				<Toaster position="top-center" toastOptions={{ duration: 2000 }} />
+				{children}
+			</body>
 		</html>
 	);
 }
