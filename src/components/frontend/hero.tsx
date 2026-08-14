@@ -2,8 +2,8 @@
 
 import { Check, Clock, FileText } from "lucide-react";
 import Image from "next/image";
+import { CommandMenu } from "@/components/command-menu";
 import { assets } from "../../../public/assets";
-import { SearchBar } from "./search-bar";
 import { TransitionText } from "./transition-text";
 
 const professionalTitles = [
@@ -39,7 +39,7 @@ export function Hero() {
 						</p>
 
 						{/* Search Bar */}
-						<SearchBar />
+						<CommandMenu variant="hero" />
 
 						{/* CTA Buttons */}
 						<div className="flex flex-wrap gap-4">

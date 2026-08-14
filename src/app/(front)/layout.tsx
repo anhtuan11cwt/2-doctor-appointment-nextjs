@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
-import { AuthLoader } from "@/components/auth-loader";
 import { Footer } from "@/components/frontend/footer";
-import { Navbar } from "@/components/frontend/navbar";
+import { SiteHeader } from "@/components/site-header";
 
 interface FrontLayoutProps {
 	children: ReactNode;
@@ -9,12 +8,10 @@ interface FrontLayoutProps {
 
 export default function FrontLayout({ children }: FrontLayoutProps) {
 	return (
-		<AuthLoader>
-			<div className="min-h-screen bg-background">
-				<Navbar />
-				<main className="pt-16">{children}</main>
-				<Footer />
-			</div>
-		</AuthLoader>
+		<div className="min-h-screen bg-background">
+			<SiteHeader />
+			<main>{children}</main>
+			<Footer />
+		</div>
 	);
 }

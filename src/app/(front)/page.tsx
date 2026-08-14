@@ -13,7 +13,7 @@ export default function HomePage() {
 			<TabbedItems />
 
 			{/* Video Consultation Doctors */}
-			<DoctorList className="bg-gray-50" href="/doctors" title="Khám qua video">
+			<DoctorList className="bg-muted" href="/doctors" title="Khám qua video">
 				<DoctorListCarousel doctors={doctors.slice(0, 6)} />
 			</DoctorList>
 

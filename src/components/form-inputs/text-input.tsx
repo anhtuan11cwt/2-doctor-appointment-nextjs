@@ -1,8 +1,13 @@
 "use client";
 
 import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 import type { FieldErrors, Path, UseFormRegister } from "react-hook-form";
+
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { cn } from "@/lib/utils";
 
 interface TextInputProps<T extends Record<string, unknown>> {
 	errors: FieldErrors<T>;
@@ -10,6 +15,7 @@ interface TextInputProps<T extends Record<string, unknown>> {
 	label: string;
 	name: Path<T>;
 	onTogglePassword?: () => void;
+	page?: "login" | "register";
 	placeholder?: string;
 	register: UseFormRegister<T>;
 	showPassword?: boolean;
@@ -26,6 +32,7 @@ export function TextInput<T extends Record<string, unknown>>({
 	type = "text",
 	placeholder,
 	isLoading = false,
+	page,
 }: TextInputProps<T>) {
 	const [showPasswordLocal, setShowPasswordLocal] = useState(false);
 	const isPassword = type === "password";
@@ -57,18 +64,30 @@ export function TextInput<T extends Record<string, unknown>>({
 	};
 
 	return (
-		<div className={isLoading ? "pointer-events-none opacity-50" : ""}>
-			<label
-				className="mb-0.5 block font-medium text-gray-700 text-sm"
+		<div
+			className={cn("space-y-1", isLoading && "pointer-events-none opacity-50")}
+		>
+			<Label
+				className={cn(
+					"text-foreground",
+					page === "login" && isPassword && "justify-between",
+				)}
 				htmlFor={name}
 			>
-				{label}
-			</label>
+				<span>{label}</span>
+				{page === "login" && isPassword && (
+					<Link
+						className="font-normal text-primary hover:underline"
+						href="/forgot-password"
+					>
+						Quên mật khẩu?
+					</Link>
+				)}
+			</Label>
 			<div className="relative">
-				<input
-					className={`w-full rounded-lg border border-gray-300 px-4 py-2 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20 ${
-						isLoading ? "cursor-not-allowed bg-gray-100" : ""
-					}`}
+				<Input
+					aria-invalid={!!errors[name]}
+					className={cn(isPassword && "pr-10")}
 					disabled={isLoading}
 					id={name}
 					maxLength={isPhone ? 10 : undefined}
@@ -79,9 +98,7 @@ export function TextInput<T extends Record<string, unknown>>({
 				/>
 				{isPassword && (
 					<button
-						className={`absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-700 ${
-							isLoading ? "cursor-not-allowed" : ""
-						}`}
+						className="absolute top-1/2 right-3 -translate-y-1/2 text-muted-foreground transition-colors hover:text-foreground disabled:cursor-not-allowed"
 						disabled={isLoading}
 						onClick={() =>
 							isControlled
@@ -91,16 +108,16 @@ export function TextInput<T extends Record<string, unknown>>({
 						type="button"
 					>
 						{showPassword ? (
-							<EyeOff className="h-4 w-4" />
+							<EyeOff className="size-4" />
 						) : (
-							<Eye className="h-4 w-4" />
+							<Eye className="size-4" />
 						)}
 					</button>
 				)}
 			</div>
 			<div className="h-3">
 				{errors[name] && (
-					<p className="text-red-600 text-xs">
+					<p className="text-destructive text-xs">
 						{errors[name]?.message as string}
 					</p>
 				)}

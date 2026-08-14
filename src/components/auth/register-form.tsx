@@ -51,6 +51,7 @@ export function RegisterForm() {
 				isLoading={isLoading}
 				label="Họ và tên"
 				name="fullName"
+				page="register"
 				register={register}
 			/>
 
@@ -59,6 +60,7 @@ export function RegisterForm() {
 				isLoading={isLoading}
 				label="Email"
 				name="email"
+				page="register"
 				register={register}
 				type="email"
 			/>
@@ -68,6 +70,7 @@ export function RegisterForm() {
 				isLoading={isLoading}
 				label="Số điện thoại"
 				name="phone"
+				page="register"
 				register={register}
 				type="tel"
 			/>
@@ -78,6 +81,7 @@ export function RegisterForm() {
 				label="Mật khẩu"
 				name="password"
 				onTogglePassword={() => setShowPassword(!showPassword)}
+				page="register"
 				register={register}
 				showPassword={showPassword}
 				type="password"
@@ -89,6 +93,7 @@ export function RegisterForm() {
 				label="Xác nhận mật khẩu"
 				name="confirmPassword"
 				onTogglePassword={() => setShowPassword(!showPassword)}
+				page="register"
 				register={register}
 				showPassword={showPassword}
 				type="password"

@@ -31,7 +31,7 @@ const timeSlots = [
 export function DoctorCard({ doctor, isInPerson = false }: DoctorCardProps) {
 	return (
 		<Link
-			className="group block rounded-lg border border-gray-200 bg-white p-4 transition-all duration-300 hover:border-gray-400 hover:shadow-md"
+			className="group block rounded-lg border border-border bg-card p-4 transition-all duration-300 hover:border-primary/50 hover:shadow-md"
 			href={`/doctors/${doctor._id}`}
 		>
 			{/* Doctor Image */}
@@ -47,18 +47,18 @@ export function DoctorCard({ doctor, isInPerson = false }: DoctorCardProps) {
 
 			{/* Doctor Info */}
 			<div className="space-y-2">
-				<h3 className="font-bold text-gray-900 text-lg uppercase tracking-wide">
+				<h3 className="font-bold text-foreground text-lg uppercase tracking-wide">
 					{doctor.name}
 				</h3>
 
-				<div className="flex items-center gap-2 text-gray-600">
+				<div className="flex items-center gap-2 text-muted-foreground">
 					<Stethoscope className="h-4 w-4" />
 					<span className="text-sm">{doctor.speciality}</span>
 				</div>
 
 				{/* Location or Video icon */}
 				{isInPerson ? (
-					<div className="flex items-center gap-2 text-gray-600">
+					<div className="flex items-center gap-2 text-muted-foreground">
 						<MapPin className="h-4 w-4" />
 						<span className="text-sm">{doctor.address.line1}</span>
 					</div>
@@ -70,19 +70,19 @@ export function DoctorCard({ doctor, isInPerson = false }: DoctorCardProps) {
 				)}
 
 				{/* Available Today badge */}
-				<div className="inline-block rounded-full bg-green-100 px-3 py-1">
-					<span className="font-medium text-green-800 text-xs uppercase">
+				<div className="inline-block rounded-full bg-green-100 px-3 py-1 dark:bg-green-900/30">
+					<span className="font-medium text-green-800 text-xs uppercase dark:text-green-300">
 						Sẵn sàng hôm nay
 					</span>
 				</div>
 
 				{/* Price and Date */}
 				<div className="flex items-center justify-between pt-2">
-					<div className="flex items-center gap-1 text-gray-600">
+					<div className="flex items-center gap-1 text-muted-foreground">
 						<Clock className="h-4 w-4" />
 						<span className="text-sm">Hôm nay</span>
 					</div>
-					<span className="font-bold text-gray-900">
+					<span className="font-bold text-foreground">
 						{new Intl.NumberFormat("vi-VN").format(doctor.fees)}₫
 					</span>
 				</div>
@@ -91,7 +91,7 @@ export function DoctorCard({ doctor, isInPerson = false }: DoctorCardProps) {
 				<div className="grid grid-cols-3 gap-2 pt-2">
 					{timeSlots.slice(0, 5).map((slot) => (
 						<button
-							className="rounded bg-blue-600 px-2 py-1 text-center text-white text-xs transition-colors hover:bg-blue-700"
+							className="rounded bg-primary px-2 py-1 text-center text-primary-foreground text-xs transition-colors hover:bg-primary/90"
 							key={`${slot.period}-${slot.time}`}
 							type="button"
 						>
@@ -99,7 +99,7 @@ export function DoctorCard({ doctor, isInPerson = false }: DoctorCardProps) {
 						</button>
 					))}
 					<button
-						className="rounded bg-blue-900 px-2 py-1 text-center text-white text-xs transition-colors hover:bg-blue-800"
+						className="rounded bg-primary/80 px-2 py-1 text-center text-primary-foreground text-xs transition-colors hover:bg-primary"
 						type="button"
 					>
 						Thêm

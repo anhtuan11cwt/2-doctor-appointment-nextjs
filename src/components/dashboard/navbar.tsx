@@ -2,7 +2,7 @@
 
 import { LogOut, Menu, Settings, User } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { Sidebar } from "@/components/dashboard/sidebar";
@@ -17,8 +17,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
-export function Navbar() {
-	const { data: session } = useSession();
+interface NavbarProps {
+	user: {
+		name?: string | null;
+		email?: string | null;
+		image?: string | null;
+	};
+}
+
+export function Navbar({ user }: NavbarProps) {
 	const [isSheetOpen, setIsSheetOpen] = useState(false);
 	const router = useRouter();
 
@@ -27,8 +34,8 @@ export function Navbar() {
 		toast.success("Đăng xuất thành công!");
 	};
 
-	const userInitials = session?.user?.name
-		? session.user.name
+	const userInitials = user?.name
+		? user.name
 				.split(" ")
 				.map((n) => n[0])
 				.join("")
@@ -59,8 +66,8 @@ export function Navbar() {
 					<DropdownMenuTrigger className="relative inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
 						<Avatar className="h-9 w-9">
 							<AvatarImage
-								alt={session?.user?.name || "User"}
-								src={session?.user?.image || undefined}
+								alt={user?.name || "User"}
+								src={user?.image || undefined}
 							/>
 							<AvatarFallback>{userInitials}</AvatarFallback>
 						</Avatar>
@@ -69,10 +76,10 @@ export function Navbar() {
 						<div className="flex items-center gap-2 p-2">
 							<div className="flex flex-col space-y-1">
 								<p className="font-medium text-sm">
-									{session?.user?.name || "Người dùng"}
+									{user?.name || "Người dùng"}
 								</p>
 								<p className="text-muted-foreground text-xs">
-									{session?.user?.email || ""}
+									{user?.email || ""}
 								</p>
 							</div>
 						</div>

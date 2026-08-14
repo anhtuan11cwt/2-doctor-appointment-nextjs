@@ -9,7 +9,7 @@ interface ServiceCardProps {
 export function ServiceCard({ service }: ServiceCardProps) {
 	return (
 		<Link
-			className="group block overflow-hidden rounded-md bg-slate-100 transition-all duration-300 hover:bg-slate-200"
+			className="group block overflow-hidden rounded-md bg-muted transition-all duration-300 hover:bg-muted/80"
 			href={`/services/${service.slug}`}
 		>
 			<div className="relative aspect-[4/3] overflow-hidden">
@@ -22,8 +22,8 @@ export function ServiceCard({ service }: ServiceCardProps) {
 				/>
 			</div>
 			<div className="p-4">
-				<h3 className="font-medium text-gray-900 text-sm">{service.title}</h3>
-				<p className="mt-1 text-gray-500 text-xs">936 lịch trống</p>
+				<h3 className="font-medium text-foreground text-sm">{service.title}</h3>
+				<p className="mt-1 text-muted-foreground text-xs">936 lịch trống</p>
 			</div>
 		</Link>
 	);

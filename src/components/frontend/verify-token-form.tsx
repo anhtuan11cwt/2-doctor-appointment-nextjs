@@ -1,15 +1,14 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { z } from "zod";
 import { updateUserById } from "@/actions/users";
+import { SubmitButton } from "@/components/form-inputs/submit-button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { Button } from "@/components/ui/button";
 import {
 	InputOTP,
 	InputOTPGroup,
@@ -53,7 +52,6 @@ export function VerifyTokenForm({ userId, userToken }: VerifyTokenFormProps) {
 		setShowNotification(false);
 
 		try {
-			await new Promise((resolve) => setTimeout(resolve, 2000));
 			const enteredToken = Number.parseInt(data.token, 10);
 			const storedToken = Number.parseInt(userToken, 10);
 
@@ -117,16 +115,11 @@ export function VerifyTokenForm({ userId, userToken }: VerifyTokenFormProps) {
 				</Alert>
 			)}
 
-			<Button className="w-full" disabled={isLoading} type="submit">
-				{isLoading ? (
-					<>
-						<Loader2 className="mr-2 h-4 w-4 animate-spin" />
-						Đang xác minh...
-					</>
-				) : (
-					"Xác minh tài khoản"
-				)}
-			</Button>
+			<SubmitButton
+				isLoading={isLoading}
+				loadingTitle="Đang xác minh, vui lòng chờ..."
+				title="Xác minh tài khoản"
+			/>
 
 			<p
 				className={`text-center text-gray-500 text-sm ${isLoading ? "pointer-events-none opacity-50" : ""}`}

@@ -84,7 +84,7 @@ export function TabbedItems() {
 	return (
 		<section className="py-16">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<h2 className="mb-8 text-center font-bold text-2xl text-gray-900 md:text-3xl">
+				<h2 className="mb-8 text-center font-bold text-2xl text-foreground md:text-3xl">
 					Dịch vụ phổ biến
 				</h2>
 
@@ -96,8 +96,8 @@ export function TabbedItems() {
 							<button
 								className={`flex items-center gap-2 rounded-md px-4 py-2 font-medium text-sm transition-all duration-300 ${
 									activeTab === tab.id
-										? "bg-primary text-white"
-										: "bg-gray-100 text-gray-700 hover:bg-gray-200"
+										? "bg-primary text-primary-foreground"
+										: "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
 								}`}
 								key={tab.id}
 								onClick={() => setActiveTab(tab.id)}
