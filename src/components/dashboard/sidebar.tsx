@@ -2,8 +2,10 @@
 
 import {
 	Calendar,
+	Globe,
 	LayoutDashboard,
 	LineChart,
+	Microscope,
 	Settings,
 	Stethoscope,
 	Users,
@@ -45,6 +47,11 @@ const sidebarLinks = [
 		icon: Settings,
 		label: "Cài đặt",
 	},
+	{
+		href: "/",
+		icon: Globe,
+		label: "Về trang chủ",
+	},
 ];
 
 interface SidebarProps {
@@ -61,6 +68,7 @@ export function Sidebar({ className }: SidebarProps) {
 					className="flex items-center gap-2 font-bold text-lg"
 					href="/dashboard"
 				>
+					<Microscope className="size-6 text-primary" />
 					<span className="text-primary">Đặt Lịch Khám</span>
 				</Link>
 			</div>

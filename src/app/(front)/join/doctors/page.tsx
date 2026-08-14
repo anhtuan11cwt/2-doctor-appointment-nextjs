@@ -31,14 +31,14 @@ const steps = [
 const cards = [
 	{
 		description: "Bắt đầu quy trình đăng ký trở thành bác sĩ trên nền tảng.",
-		href: "/register",
+		href: "/register?role=doctor",
 		icon: FileText,
 		linkTitle: "Bắt đầu",
 		title: "Đăng ký mới",
 	},
 	{
 		description: "Tiếp tục hoàn thiện hồ sơ đăng ký của bạn.",
-		href: "/register",
+		href: "/register?role=doctor",
 		icon: Stethoscope,
 		linkTitle: "Tiếp tục",
 		title: "Hoàn tất hồ sơ",
@@ -96,29 +96,29 @@ export default function JoinDoctorsPage() {
 	return (
 		<div className="min-h-screen">
 			{/* Hero Section */}
-			<section className="bg-gradient-to-b from-blue-50 to-white py-16 md:py-24">
+			<section className="bg-gradient-to-b from-blue-50 to-white py-16 md:py-24 dark:from-slate-950 dark:to-background">
 				<div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-12 px-8 md:grid-cols-2">
 					<div>
-						<h1 className="mb-6 font-bold text-4xl text-gray-900 leading-tight md:text-5xl">
+						<h1 className="mb-6 font-bold text-4xl text-foreground leading-tight md:text-5xl">
 							Xây dựng phòng khám
-							<span className="text-blue-600"> trực tiếp</span> phát triển
+							<span className="text-primary"> trực tiếp</span> phát triển
 						</h1>
-						<p className="mb-8 text-gray-600 text-lg leading-relaxed">
+						<p className="mb-8 text-lg text-muted-foreground leading-relaxed">
 							Tham gia nền tảng đặt lịch khám bệnh hàng đầu. Kết nối với hàng
 							ngàn bệnh nhân đang tìm kiếm dịch vụ chăm sóc sức khỏe chất lượng.
 						</p>
 						<div className="mb-8">
 							<CustomButton
-								className="bg-blue-600 px-8 py-3 text-lg hover:bg-blue-700"
-								href="/register"
+								className="bg-primary px-8 py-3 text-lg hover:bg-primary/90"
+								href="/register?role=doctor"
 								title="Bắt đầu ngay"
 							/>
 						</div>
 						<ul className="space-y-3">
 							{features.map((feature) => (
 								<li className="flex items-center gap-2" key={feature}>
-									<Check className="h-5 w-5 flex-shrink-0 text-blue-600" />
-									<span className="text-gray-700">{feature}</span>
+									<Check className="h-5 w-5 flex-shrink-0 text-primary" />
+									<span className="text-foreground/80">{feature}</span>
 								</li>
 							))}
 						</ul>
@@ -136,29 +136,31 @@ export default function JoinDoctorsPage() {
 			</section>
 
 			{/* Steps Section */}
-			<section className="bg-white py-16 md:py-24">
+			<section className="bg-background py-16 md:py-24">
 				<div className="mx-auto max-w-6xl px-8">
 					<div className="mb-12 text-center">
-						<h2 className="mb-4 font-bold text-3xl text-gray-900 md:text-4xl">
+						<h2 className="mb-4 font-bold text-3xl text-foreground md:text-4xl">
 							Tham gia Đặt Lịch Khám để tăng doanh thu
 						</h2>
-						<p className="mx-auto max-w-2xl text-gray-600 text-lg">
+						<p className="mx-auto max-w-2xl text-lg text-muted-foreground">
 							Quy trình đơn giản 3 bước để bắt đầu nhận bệnh nhân mới
 						</p>
 					</div>
 					<div className="grid gap-8 md:grid-cols-3">
 						{steps.map((step, index) => (
 							<div
-								className="rounded-xl border border-gray-100 bg-gray-50 p-6 text-center"
+								className="rounded-xl border border-border bg-muted p-6 text-center"
 								key={step.title}
 							>
-								<div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-600 font-bold text-white text-xl">
+								<div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary font-bold text-primary-foreground text-xl">
 									{index + 1}
 								</div>
-								<h3 className="mb-2 font-semibold text-gray-900 text-lg">
+								<h3 className="mb-2 font-semibold text-foreground text-lg">
 									{step.title}
 								</h3>
-								<p className="text-gray-600 text-sm">{step.description}</p>
+								<p className="text-muted-foreground text-sm">
+									{step.description}
+								</p>
 							</div>
 						))}
 					</div>
@@ -166,9 +168,9 @@ export default function JoinDoctorsPage() {
 			</section>
 
 			{/* Action Cards Section */}
-			<section className="bg-gray-50 py-16 md:py-24">
+			<section className="bg-muted py-16 md:py-24">
 				<div className="mx-auto max-w-6xl px-8">
-					<h2 className="mb-12 text-center font-bold text-3xl text-gray-900">
+					<h2 className="mb-12 text-center font-bold text-3xl text-foreground">
 						Bắt đầu hành trình của bạn
 					</h2>
 					<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -176,14 +178,14 @@ export default function JoinDoctorsPage() {
 							const Icon = card.icon;
 							return (
 								<div
-									className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
+									className="rounded-xl border border-border bg-card p-6 shadow-sm transition-shadow hover:shadow-md"
 									key={card.title}
 								>
-									<Icon className="mb-4 h-8 w-8 text-blue-600" />
-									<h3 className="mb-2 font-semibold text-gray-900">
+									<Icon className="mb-4 h-8 w-8 text-primary" />
+									<h3 className="mb-2 font-semibold text-foreground">
 										{card.title}
 									</h3>
-									<p className="mb-4 text-gray-600 text-sm">
+									<p className="mb-4 text-muted-foreground text-sm">
 										{card.description}
 									</p>
 									<CustomButton
@@ -200,9 +202,9 @@ export default function JoinDoctorsPage() {
 			</section>
 
 			{/* FAQ Section */}
-			<section className="bg-white py-16 md:py-24">
+			<section className="bg-background py-16 md:py-24">
 				<div className="mx-auto max-w-3xl px-8">
-					<h2 className="mb-12 text-center font-bold text-3xl text-gray-900">
+					<h2 className="mb-12 text-center font-bold text-3xl text-foreground">
 						Câu hỏi thường gặp
 					</h2>
 					<CustomAccordion items={faqs} />
@@ -210,13 +212,13 @@ export default function JoinDoctorsPage() {
 			</section>
 
 			{/* Pricing Section */}
-			<section className="bg-gray-50 py-16 md:py-24">
+			<section className="bg-muted py-16 md:py-24">
 				<div className="mx-auto max-w-6xl px-8">
 					<div className="mb-12 text-center">
-						<h2 className="mb-4 font-bold text-3xl text-gray-900">
+						<h2 className="mb-4 font-bold text-3xl text-foreground">
 							Bảng giá dịch vụ
 						</h2>
-						<p className="mx-auto max-w-2xl text-gray-600 text-lg">
+						<p className="mx-auto max-w-2xl text-lg text-muted-foreground">
 							Chọn gói phù hợp với quy mô phòng khám của bạn
 						</p>
 					</div>

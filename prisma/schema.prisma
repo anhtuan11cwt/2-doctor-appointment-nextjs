@@ -24,6 +24,7 @@ model User {
   password      String
   token         String?
   role          UserRole  @default(USER)
+  plan          String?
   emailVerified DateTime?
   isVerified    Boolean   @default(false)
   image         String?

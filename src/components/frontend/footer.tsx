@@ -55,19 +55,19 @@ export function Footer() {
 	const currentYear = new Date().getFullYear();
 
 	return (
-		<footer className="border-gray-200 border-t bg-white">
+		<footer className="border-border border-t bg-background">
 			<div className="mx-auto max-w-7xl px-8 py-12">
 				<div className="grid grid-cols-2 gap-8 md:grid-cols-4">
 					{/* Company */}
 					<div>
-						<h3 className="mb-4 font-semibold text-gray-900 text-sm uppercase tracking-wider">
+						<h3 className="mb-4 font-semibold text-foreground text-sm uppercase tracking-wider">
 							Công ty
 						</h3>
 						<ul className="space-y-3">
 							{footerLinks.company.map((link) => (
 								<li key={link.href}>
 									<Link
-										className="text-gray-600 text-sm transition-colors hover:text-blue-600"
+										className="text-muted-foreground text-sm transition-colors hover:text-primary"
 										href={link.href}
 									>
 										{link.label}
@@ -79,14 +79,14 @@ export function Footer() {
 
 					{/* Services */}
 					<div>
-						<h3 className="mb-4 font-semibold text-gray-900 text-sm uppercase tracking-wider">
+						<h3 className="mb-4 font-semibold text-foreground text-sm uppercase tracking-wider">
 							Dịch vụ
 						</h3>
 						<ul className="space-y-3">
 							{footerLinks.services.map((link) => (
 								<li key={link.href}>
 									<Link
-										className="text-gray-600 text-sm transition-colors hover:text-blue-600"
+										className="text-muted-foreground text-sm transition-colors hover:text-primary"
 										href={link.href}
 									>
 										{link.label}
@@ -98,14 +98,14 @@ export function Footer() {
 
 					{/* Support */}
 					<div>
-						<h3 className="mb-4 font-semibold text-gray-900 text-sm uppercase tracking-wider">
+						<h3 className="mb-4 font-semibold text-foreground text-sm uppercase tracking-wider">
 							Hỗ trợ
 						</h3>
 						<ul className="space-y-3">
 							{footerLinks.support.map((link) => (
 								<li key={link.href}>
 									<Link
-										className="text-gray-600 text-sm transition-colors hover:text-blue-600"
+										className="text-muted-foreground text-sm transition-colors hover:text-primary"
 										href={link.href}
 									>
 										{link.label}
@@ -117,14 +117,14 @@ export function Footer() {
 
 					{/* Legal */}
 					<div>
-						<h3 className="mb-4 font-semibold text-gray-900 text-sm uppercase tracking-wider">
+						<h3 className="mb-4 font-semibold text-foreground text-sm uppercase tracking-wider">
 							Pháp lý
 						</h3>
 						<ul className="space-y-3">
 							{footerLinks.legal.map((link) => (
 								<li key={link.href}>
 									<Link
-										className="text-gray-600 text-sm transition-colors hover:text-blue-600"
+										className="text-muted-foreground text-sm transition-colors hover:text-primary"
 										href={link.href}
 									>
 										{link.label}
@@ -136,8 +136,8 @@ export function Footer() {
 				</div>
 
 				{/* Bottom section */}
-				<div className="mt-12 flex flex-col items-center justify-between gap-4 border-gray-200 border-t pt-8 md:flex-row">
-					<p className="text-gray-500 text-sm">
+				<div className="mt-12 flex flex-col items-center justify-between gap-4 border-border border-t pt-8 md:flex-row">
+					<p className="text-muted-foreground text-sm">
 						© {currentYear} Đặt Lịch Khám Bệnh. Bảo lưu mọi quyền.
 					</p>
 					<div className="flex items-center gap-4">

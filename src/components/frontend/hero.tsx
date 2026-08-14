@@ -16,12 +16,12 @@ const professionalTitles = [
 
 export function Hero() {
 	return (
-		<section className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-white pt-20 pb-16">
+		<section className="relative overflow-hidden bg-gradient-to-br from-blue-50 to-white pt-20 pb-16 dark:from-slate-950 dark:to-background">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 				<div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
 					{/* Left content */}
 					<div className="space-y-8">
-						<h1 className="font-bold text-4xl text-gray-900 leading-tight md:text-5xl lg:text-6xl">
+						<h1 className="font-bold text-4xl text-foreground leading-tight md:text-5xl lg:text-6xl">
 							Đặt lịch với{" "}
 							<span className="text-primary">
 								<TransitionText
@@ -33,7 +33,7 @@ export function Hero() {
 							<br />
 							của bạn
 						</h1>
-						<p className="max-w-xl text-gray-600 text-lg">
+						<p className="max-w-xl text-lg text-muted-foreground">
 							Đặt lịch khám bệnh trực tuyến nhanh chóng và tiện lợi. Kết nối với
 							hàng nghìn bác sĩ uy tín trên toàn quốc.
 						</p>
@@ -51,7 +51,7 @@ export function Hero() {
 								Cần khám gấp
 							</button>
 							<button
-								className="flex items-center gap-2 rounded-lg border border-gray-300 px-6 py-3 font-medium text-gray-700 transition-colors hover:bg-gray-50"
+								className="flex items-center gap-2 rounded-lg border border-border px-6 py-3 font-medium text-foreground transition-colors hover:bg-muted"
 								type="button"
 							>
 								<FileText className="h-4 w-4" />
@@ -63,15 +63,15 @@ export function Hero() {
 						<div className="grid grid-cols-3 gap-8 pt-8">
 							<div className="text-center">
 								<div className="font-bold text-3xl text-primary">1.800+</div>
-								<div className="text-gray-500 text-sm">Bệnh nhân</div>
+								<div className="text-muted-foreground text-sm">Bệnh nhân</div>
 							</div>
 							<div className="text-center">
 								<div className="font-bold text-3xl text-primary">120+</div>
-								<div className="text-gray-500 text-sm">Chuyên gia</div>
+								<div className="text-muted-foreground text-sm">Chuyên gia</div>
 							</div>
 							<div className="text-center">
 								<div className="font-bold text-3xl text-primary">98%</div>
-								<div className="text-gray-500 text-sm">Hài lòng</div>
+								<div className="text-muted-foreground text-sm">Hài lòng</div>
 							</div>
 						</div>
 					</div>
@@ -88,29 +88,31 @@ export function Hero() {
 								width={600}
 							/>
 							{/* Floating elements */}
-							<div className="absolute top-10 left-10 animate-bounce rounded-xl bg-white p-4 shadow-lg">
+							<div className="absolute top-10 left-10 animate-bounce rounded-xl bg-card p-4 shadow-lg">
 								<div className="flex items-center space-x-3">
 									<div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
 										<Check className="h-5 w-5 text-green-600" />
 									</div>
 									<div>
-										<div className="font-medium text-gray-900 text-sm">
+										<div className="font-medium text-foreground text-sm">
 											Đặt lịch thành công
 										</div>
-										<div className="text-gray-500 text-xs">Hôm nay</div>
+										<div className="text-muted-foreground text-xs">Hôm nay</div>
 									</div>
 								</div>
 							</div>
-							<div className="absolute right-10 bottom-10 rounded-xl bg-white p-4 shadow-lg">
+							<div className="absolute right-10 bottom-10 rounded-xl bg-card p-4 shadow-lg">
 								<div className="flex items-center space-x-3">
 									<div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100">
 										<Clock className="h-5 w-5 text-blue-600" />
 									</div>
 									<div>
-										<div className="font-medium text-gray-900 text-sm">
+										<div className="font-medium text-foreground text-sm">
 											Nhắc lịch hẹn
 										</div>
-										<div className="text-gray-500 text-xs">Trước 24h</div>
+										<div className="text-muted-foreground text-xs">
+											Trước 24h
+										</div>
 									</div>
 								</div>
 							</div>

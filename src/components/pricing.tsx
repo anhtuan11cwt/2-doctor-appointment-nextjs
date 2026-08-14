@@ -21,9 +21,10 @@ const plans = [
 			"Phí giao dịch 5%",
 		],
 		fee: "5%",
-		href: "/register",
+		href: "/register?role=doctor&plan=free",
 		isPopular: false,
 		name: "Cơ bản",
+		plan: "free",
 		price: "Miễn phí",
 		priceSuffix: "",
 	},
@@ -38,9 +39,10 @@ const plans = [
 			"Báo cáo doanh thu",
 		],
 		fee: "2.5%",
-		href: "/register",
+		href: "/register?role=doctor&plan=professional",
 		isPopular: true,
 		name: "Chuyên nghiệp",
+		plan: "professional",
 		price: "1.499.000đ",
 		priceSuffix: "/tháng",
 	},
@@ -57,9 +59,10 @@ const plans = [
 			"Đào tạo riêng",
 		],
 		fee: "1%",
-		href: "/register",
+		href: "/register?role=doctor&plan=enterprise",
 		isPopular: false,
 		name: "Doanh nghiệp",
+		plan: "enterprise",
 		price: "2.499.000đ",
 		priceSuffix: "/tháng",
 	},
@@ -71,35 +74,39 @@ export function Pricing() {
 			<div className="grid gap-8 md:grid-cols-3">
 				{plans.map((plan) => (
 					<div
-						className={`relative rounded-xl border bg-white p-8 shadow-sm transition-shadow hover:shadow-md ${
+						className={`relative rounded-xl border bg-card p-8 shadow-sm transition-shadow hover:shadow-md ${
 							plan.isPopular
-								? "border-blue-500 ring-2 ring-blue-500/20"
-								: "border-gray-200"
+								? "border-primary ring-2 ring-primary/20"
+								: "border-border"
 						}`}
 						key={plan.name}
 					>
 						{plan.isPopular && (
-							<Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-600">
+							<Badge className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary">
 								Phổ biến nhất
 							</Badge>
 						)}
 						<div className="mb-6">
-							<h3 className="font-semibold text-gray-900 text-lg uppercase tracking-wider">
+							<h3 className="font-bold text-foreground text-lg uppercase tracking-wider">
 								{plan.name}
 							</h3>
-							<p className="mt-1 text-gray-500 text-sm">{plan.description}</p>
+							<p className="mt-1 text-muted-foreground text-sm">
+								{plan.description}
+							</p>
 						</div>
 						<div className="mb-6">
-							<span className="font-bold text-4xl text-gray-900">
+							<span className="font-bold text-4xl text-foreground">
 								{plan.price}
 							</span>
-							<span className="text-gray-500 text-sm">{plan.priceSuffix}</span>
+							<span className="text-muted-foreground text-sm">
+								{plan.priceSuffix}
+							</span>
 						</div>
-						<div className="mb-6 flex items-center gap-1.5 text-gray-600 text-sm">
+						<div className="mb-6 flex items-center gap-1.5 text-muted-foreground text-sm">
 							<span>Phí giao dịch: {plan.fee}</span>
 							<Tooltip>
 								<TooltipTrigger>
-									<HelpCircle className="h-4 w-4 cursor-help text-gray-400" />
+									<HelpCircle className="h-4 w-4 cursor-help text-muted-foreground" />
 								</TooltipTrigger>
 								<TooltipContent>
 									<p>Phí áp dụng cho mỗi giao dịch qua Stripe</p>
@@ -109,14 +116,16 @@ export function Pricing() {
 						<ul className="mb-8 space-y-3">
 							{plan.features.map((feature) => (
 								<li className="flex items-start gap-2" key={feature}>
-									<Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-600" />
-									<span className="text-gray-600 text-sm">{feature}</span>
+									<Check className="mt-0.5 h-4 w-4 flex-shrink-0 text-primary" />
+									<span className="text-muted-foreground text-sm">
+										{feature}
+									</span>
 								</li>
 							))}
 						</ul>
 						<CustomButton
 							className={`w-full ${
-								plan.isPopular ? "bg-blue-600 hover:bg-blue-700" : ""
+								plan.isPopular ? "bg-primary hover:bg-primary/90" : ""
 							}`}
 							href={plan.href}
 							title="Bắt đầu ngay"

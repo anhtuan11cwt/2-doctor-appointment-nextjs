@@ -21,10 +21,10 @@ export function CustomAccordion({ items }: CustomAccordionProps) {
 		<Accordion className="w-full">
 			{items.map((item) => (
 				<AccordionItem key={item.question} value={item.question}>
-					<AccordionTrigger className="text-left font-medium text-gray-900">
+					<AccordionTrigger className="text-left font-medium text-foreground">
 						{item.question}
 					</AccordionTrigger>
-					<AccordionContent className="text-gray-600">
+					<AccordionContent className="text-muted-foreground">
 						{item.answer}
 					</AccordionContent>
 				</AccordionItem>

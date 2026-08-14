@@ -1,4 +1,6 @@
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 interface SectionHeadingProps {
 	className?: string;
@@ -19,12 +21,15 @@ export function SectionHeading({
 				{title}
 			</h2>
 			{href && (
-				<Link
-					className="font-medium text-primary text-sm transition-colors hover:text-primary/80"
-					href={href}
+				<Button
+					className="gap-1 px-2 font-medium text-primary"
+					nativeButton={false}
+					render={<Link href={href} />}
+					variant="ghost"
 				>
 					{linkText}
-				</Link>
+					<ArrowUpRight className="size-4" />
+				</Button>
 			)}
 		</div>
 	);

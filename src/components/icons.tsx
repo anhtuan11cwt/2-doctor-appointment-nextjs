@@ -4,6 +4,7 @@ import {
 	LogOut,
 	type LucideIcon,
 	Menu,
+	Microscope,
 	Moon,
 	Search,
 	Settings,
@@ -11,7 +12,6 @@ import {
 	User,
 	X,
 } from "lucide-react";
-import Image from "next/image";
 
 export type Icon = LucideIcon;
 
@@ -37,13 +37,7 @@ export function Logo({
 }) {
 	return (
 		<span className="flex items-center gap-2">
-			<Image
-				alt="Đặt Lịch Khám"
-				className="h-8 w-8"
-				height={32}
-				src="/logo.svg"
-				width={32}
-			/>
+			<Microscope className="size-8 text-primary" />
 			{showText && <span className={className}>Đặt Lịch Khám</span>}
 		</span>
 	);

@@ -1,7 +1,17 @@
 import Image from "next/image";
 import { RegisterForm } from "@/components/auth/register-form";
 
-export default function RegisterPage() {
+interface RegisterPageProps {
+	searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}
+
+export default async function RegisterPage({
+	searchParams,
+}: RegisterPageProps) {
+	const params = await searchParams;
+	const role = Array.isArray(params.role) ? params.role[0] : params.role;
+	const plan = Array.isArray(params.plan) ? params.plan[0] : params.plan;
+
 	return (
 		<div className="flex min-h-[calc(100vh-4rem)] items-start justify-center bg-background p-4 pt-8 md:items-center md:pt-4">
 			<div className="w-full max-w-7xl overflow-hidden rounded-2xl border bg-card shadow-xl">
@@ -35,7 +45,7 @@ export default function RegisterPage() {
 								</p>
 							</div>
 
-							<RegisterForm />
+							<RegisterForm plan={plan} role={role} />
 						</div>
 					</div>
 				</div>

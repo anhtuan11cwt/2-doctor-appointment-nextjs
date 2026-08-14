@@ -41,9 +41,9 @@ const brands = [
 
 export function Brands() {
 	return (
-		<section className="bg-gray-50 py-12">
+		<section className="bg-muted py-12">
 			<div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<h2 className="mb-8 text-center font-medium text-gray-500 text-sm uppercase tracking-wider">
+				<h2 className="mb-8 text-center font-medium text-muted-foreground text-sm uppercase tracking-wider">
 					Được tin tưởng bởi
 				</h2>
 				<div className="flex items-center gap-8 overflow-x-auto pb-2 md:grid md:grid-cols-3 md:justify-items-center md:overflow-visible md:pb-0 lg:grid-cols-5">

@@ -11,7 +11,12 @@ import { SubmitButton } from "@/components/form-inputs/submit-button";
 import { TextInput } from "@/components/form-inputs/text-input";
 import { type RegisterInputProps, registerSchema } from "@/lib/validations";
 
-export function RegisterForm() {
+interface RegisterFormProps {
+	plan?: string;
+	role?: string;
+}
+
+export function RegisterForm({ plan, role }: RegisterFormProps) {
 	const [isLoading, setIsLoading] = useState(false);
 	const [showPassword, setShowPassword] = useState(false);
 	const router = useRouter();
@@ -27,7 +32,10 @@ export function RegisterForm() {
 		setIsLoading(true);
 		try {
 			await new Promise((resolve) => setTimeout(resolve, 2000));
-			const result = await createUser(data);
+			const result = await createUser(
+				data,
+				role === "doctor" ? { plan, role: "DOCTOR" } : undefined,
+			);
 			if (result.status === 201) {
 				toast.success(result.message);
 				if (result.data) {

@@ -44,7 +44,7 @@ export function Availability({
 
 	return (
 		<div className="mt-6">
-			<h2 className="mb-4 font-bold text-slate-500 text-sm uppercase tracking-wide">
+			<h2 className="mb-4 font-bold text-muted-foreground text-sm uppercase tracking-wide">
 				Chọn ngày và giờ khám
 			</h2>
 
@@ -64,8 +64,8 @@ export function Availability({
 				{/* Time slots */}
 				<div>
 					{bookDate && (
-						<div className="mb-4 rounded-md border border-blue-500 bg-blue-50 p-3">
-							<p className="font-medium text-blue-700">{formattedDate}</p>
+						<div className="mb-4 rounded-md border border-primary/20 bg-primary/10 p-3">
+							<p className="font-medium text-primary">{formattedDate}</p>
 						</div>
 					)}
 
@@ -74,8 +74,8 @@ export function Availability({
 							<button
 								className={`rounded-md px-3 py-2 text-center text-sm transition-all ${
 									selectedTime === time
-										? "bg-blue-600 text-white"
-										: "bg-gray-100 text-gray-700 hover:bg-blue-100 hover:text-blue-600"
+										? "bg-primary text-primary-foreground"
+										: "bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary"
 								}`}
 								key={time}
 								onClick={() => setSelectedTime(time)}

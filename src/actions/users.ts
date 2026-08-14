@@ -5,7 +5,17 @@ import { prisma } from "@/lib/db";
 import { sendVerificationEmail } from "@/lib/email";
 import { type RegisterInputProps, registerSchema } from "@/lib/validations";
 
-export async function createUser(data: RegisterInputProps) {
+const VALID_PLANS = ["free", "professional", "enterprise"];
+
+interface CreateUserOptions {
+	plan?: string;
+	role?: "DOCTOR";
+}
+
+export async function createUser(
+	data: RegisterInputProps,
+	options?: CreateUserOptions,
+) {
 	try {
 		// Kiểm tra dữ liệu với Zod
 		const validationResult = registerSchema.safeParse(data);
@@ -13,6 +23,16 @@ export async function createUser(data: RegisterInputProps) {
 			return {
 				data: null,
 				message: validationResult.error.issues[0].message,
+				status: 400,
+			};
+		}
+
+		const isDoctor = options?.role === "DOCTOR";
+		const plan = options?.plan;
+		if (isDoctor && plan && !VALID_PLANS.includes(plan)) {
+			return {
+				data: null,
+				message: "Gói dịch vụ không hợp lệ",
 				status: 400,
 			};
 		}
@@ -43,6 +63,8 @@ export async function createUser(data: RegisterInputProps) {
 				name: data.fullName,
 				password: hashedPassword,
 				phone: data.phone,
+				plan: isDoctor ? plan : null,
+				role: isDoctor ? "DOCTOR" : "USER",
 				token: token,
 			},
 		});
